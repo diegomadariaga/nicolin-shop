@@ -1,0 +1,137 @@
+### Nicolin Shop API Tests
+### Base URL: http://localhost:3000
+
+### 1. Get all users
+GET http://localhost:3000/users
+Content-Type: application/json
+
+###
+
+### 2. Create a new user
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "email": "juan.perez@example.com",
+  "firstName": "Juan",
+  "lastName": "Pérez"
+}
+
+###
+
+### 3. Create another user
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "email": "maria.garcia@example.com",
+  "firstName": "María",
+  "lastName": "García"
+}
+
+###
+
+### 4. Get user by ID (replace :id with actual user ID, e.g., 1)
+GET http://localhost:3000/users/1
+Content-Type: application/json
+
+###
+
+### 5. Update user by ID (replace :id with actual user ID, e.g., 1)
+PUT http://localhost:3000/users/1
+Content-Type: application/json
+
+{
+  "firstName": "Juan Carlos",
+  "lastName": "Pérez López"
+}
+
+###
+
+### 6. Update user email (partial update)
+PUT http://localhost:3000/users/1
+Content-Type: application/json
+
+{
+  "email": "juan.carlos.perez@example.com"
+}
+
+###
+
+### 7. Get user by ID after update
+GET http://localhost:3000/users/1
+Content-Type: application/json
+
+###
+
+### 8. Delete user by ID (replace :id with actual user ID, e.g., 2)
+DELETE http://localhost:3000/users/2
+Content-Type: application/json
+
+###
+
+### 9. Try to get deleted user (should return 404)
+GET http://localhost:3000/users/2
+Content-Type: application/json
+
+###
+
+### 10. Get all users again (to see final state)
+GET http://localhost:3000/users
+Content-Type: application/json
+
+###
+
+### Test data for creating multiple users
+### 11. Create user with different data
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "email": "carlos.rodriguez@example.com",
+  "firstName": "Carlos",
+  "lastName": "Rodríguez"
+}
+
+###
+
+### 12. Create user with minimal data
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "email": "ana.martinez@example.com",
+  "firstName": "Ana",
+  "lastName": "Martínez"
+}
+
+###
+
+### Error testing
+### 13. Try to create user with duplicate email (should fail)
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "email": "juan.perez@example.com",
+  "firstName": "Otro",
+  "lastName": "Usuario"
+}
+
+###
+
+### 14. Try to get non-existent user (should return 404)
+GET http://localhost:3000/users/9999
+Content-Type: application/json
+
+###
+
+### 15. Try to update non-existent user (should return 404)
+PUT http://localhost:3000/users/9999
+Content-Type: application/json
+
+{
+  "firstName": "No Existe"
+}
+
+###
