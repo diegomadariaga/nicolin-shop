@@ -8,6 +8,7 @@ import { UserModule } from './modules/user.module';
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',
+      cache: true,
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -21,6 +22,7 @@ import { UserModule } from './modules/user.module';
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: configService.get('NODE_ENV') === 'development',
         logging: configService.get('NODE_ENV') === 'development',
+        autoLoadEntities: true,
       }),
       inject: [ConfigService],
     }),
