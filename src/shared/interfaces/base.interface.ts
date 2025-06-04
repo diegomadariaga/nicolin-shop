@@ -1,9 +1,3 @@
-export interface BaseEntity {
-  id: number;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
 export interface Repository<T> {
   findAll(): Promise<T[]>;
   findById(id: number): Promise<T | null>;

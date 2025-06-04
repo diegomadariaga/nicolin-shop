@@ -1,4 +1,9 @@
-import { Injectable, Inject, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  Inject,
+  NotFoundException,
+  ConflictException,
+} from '@nestjs/common';
 import { IUserRepository } from '../../domain/repositories/user.repository.interface';
 import { User } from '../../domain/entities/user.entity';
 import { CreateUserDto, UpdateUserDto } from '../dtos/user.dto';
@@ -29,7 +34,7 @@ export class UserUseCases {
       createUserDto.email,
     );
     if (existingUser) {
-      throw new NotFoundException(
+      throw new ConflictException(
         `User with email ${createUserDto.email} already exists`,
       );
     }
