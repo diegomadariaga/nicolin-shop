@@ -13,7 +13,7 @@ import { UserModule } from './modules/user.module';
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
-        host: 'localhost',
+        host: configService.get('POSTGRES_HOST') || 'localhost',
         port: 5432,
         username: configService.get('POSTGRES_USER'),
         password: configService.get('POSTGRES_PASSWORD'),
