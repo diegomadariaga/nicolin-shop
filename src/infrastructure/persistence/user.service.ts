@@ -1,20 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from '../entities/user.entity';
+import { User } from '../../domain/entities/user.entity';
+import { IUserRepository } from '../../domain/repositories/user.repository.interface';
 
 @Injectable()
-export class UserService {
+export class UserRepository implements IUserRepository {
   constructor(
     @InjectRepository(User)
-    private userRepository: Repository<User>,
+    private readonly userRepository: Repository<User>,
   ) {}
 
   async findAll(): Promise<User[]> {
     return this.userRepository.find();
   }
 
-  async findOne(id: number): Promise<User | null> {
+  async findById(id: number): Promise<User | null> {
     return this.userRepository.findOne({ where: { id } });
   }
 
@@ -25,10 +26,10 @@ export class UserService {
 
   async update(id: number, userData: Partial<User>): Promise<User | null> {
     await this.userRepository.update(id, userData);
-    return this.findOne(id);
+    return this.findById(id);
   }
 
-  async remove(id: number): Promise<void> {
+  async delete(id: number): Promise<void> {
     await this.userRepository.delete(id);
   }
 }
